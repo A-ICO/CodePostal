@@ -1,0 +1,57 @@
+body {
+    background-image: url(../img/bg.jpg);
+    color: rgb(20, 19, 19) !important; /* Texte en blanc */
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    color: white; /* Couleur des titres en blanc */
+    text-align: center;
+    font-family: Anton SC;
+    color: rgb(232, 218, 200);
+}
+
+#departement-section, #pays-section {
+    margin-top: 20px;
+}
+
+#countryResults {
+    display: flex;
+    justify-content: space-between;  /* Espace égal entre les éléments */
+    gap: 20px;  /* Espacement entre les colonnes */
+    margin-top: 20px;
+    flex-wrap: wrap;  /* Permet aux éléments de passer à la ligne sur petits écrans */
+    color: white !important;
+    font-family: Anton SC;
+}
+
+#countryInfo, #countryMap {
+    padding: 15px;
+    background-color:transparent;
+    border-radius: 8px; /* Pour un rendu plus esthétique */
+}
+
+#countryMap {
+    height: 400px;
+    width: 100%; /* Pour garantir que la carte occupe toute la largeur disponible */
+}
+
+#countryResults > div {
+    flex: 1; /* Permet à chaque div d'occuper un espace égal */
+    min-width: 300px; /* Largeur minimale des colonnes */
+}
+
+@media (max-width: 768px) {
+    #countryResults {
+        flex-direction: column;  /* Affiche les éléments en colonne sur petits écrans */
+        align-items: center;  /* Centre les éléments */
+    }
+
+    #countryInfo, #countryMap {
+        width: 100%;  /* Les éléments prennent toute la largeur sur petits écrans */
+        margin-bottom: 20px;  /* Espacement entre les éléments */
+    }
+}
+#autocomplete-results li {
+    cursor: pointer;
+}

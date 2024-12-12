@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Postal JS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Requête Ajax en JavaScript - Consommation du Service Web Code Postal</h1>
+    <div id="center">
+        <div class="container">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-address-card"></i>&nbsp;Code Postal</span>
+                </div>
+                <input id="postcode" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Entrez votre code postal">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" id="btnRechercher" type="button">Rechercher</button>
+                </div>
+                <select class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+                </select>
+            </div>
+        </div>
+    </div>
+    <script>
+        const btnRechercher  = document.getElementById("btnRechercher");
+        const inputCP        = document.getElementById("postcode");
+        const optionSelect   = document.getElementById("inputGroupSelect03");
+        
+        btnRechercher.addEventListener("click", function(){
+
+            let ajax = new XMLHttpRequest();
+            let fluxHTML = "";
+            let obj;
+
+            ajax.open('GET', 'http://api.zippopotam.us/fr/' + inputCP.value, true);
+            ajax.send();
+
+
+            ajax.addEventListener("readystatechange", function(){
+
+                if (this.readyState == 4 && this.status == 200) {
+
+                    console.log("Données bruts : " + this.responseText);
+                    obj = JSON.parse(this.responseText);
+                    console.log(obj);
+
+                    for (var i = 0; i < obj.places.length; i++) {
+    
+                        fluxHTML += "<option>" + obj['places'][i]['place name'] + "</option>";
+                    }
+
+                        optionSelect.innerHTML = fluxHTML;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
